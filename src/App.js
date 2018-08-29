@@ -26,7 +26,7 @@ class App extends Component {
      * */
 
     countDown(){
-        setInterval(
+        this.timer = setInterval(
             ()=>{this.setState({
                 ...this.state,
                 remainTime   : this.state.remainTime -1
@@ -35,7 +35,7 @@ class App extends Component {
     }
 
     countStop(){
-        clearInterval(this.countDown);
+        clearInterval(this.timer);
     }
 
     increaseTime(){
