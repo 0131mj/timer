@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import moment from 'moment'
 import ControlButtons from './Components/ControlButtons'
 
 class App extends Component {
@@ -11,8 +12,9 @@ class App extends Component {
           // hours : 0,
           // minutes : 0,
           // seconds: 0,
-            inputTime: 20,
-            remainTime : 20,
+
+            inputTime: 20, //minutes
+            remainTime : 20 * 60,
         }
     }
 
@@ -42,7 +44,7 @@ class App extends Component {
       this.setState({
           ...this.state,
           inputTime : this.state.inputTime + 5,
-          remainTime : this.state.remainTime + 5,
+          remainTime : this.state.remainTime + 300,
       })
     }
 
@@ -51,7 +53,7 @@ class App extends Component {
           this.setState({
               ...this.state,
               inputTime : this.state.inputTime - 5,
-              remainTime : this.state.remainTime - 5,
+              remainTime : this.state.remainTime - 300,
           })
       }
     }
@@ -71,13 +73,18 @@ class App extends Component {
      * */
   render() {
     return (
-      <div className="App">
+      <div className="App" style={{padding:"20px"}}>
           <div>
-              설정시간 : <span>{this.state.inputTime}</span> 분
+              {/*: <span>{this.state.inputTime}</span> 분*/}
+              <span>설정시간</span>
               <button onClick={()=>{this.increaseTime()}}>▲</button>
               <button onClick={()=>{this.decreaseTime()}}>▼</button>
           </div>
-          {this.state.remainTime} : {'00'}
+
+          <div style={{fontSize:"30px", margin:"20px"}}>
+              {Math.floor(this.state.remainTime/60)} : { (this.state.remainTime % 60) < 10 ? '0' + (this.state.remainTime % 60) : this.state.remainTime % 60  }
+          </div>
+
           <div>
               <button onClick={()=>this.countDown()}>시작</button>
               <button onClick={()=>this.countStop()}>중지</button>
@@ -86,7 +93,7 @@ class App extends Component {
           <br/>
 
 
-          <br/> 1초마다 카운트가 되도록 하기
+          <br/>
           {/*카운트 시작*/}
           {/*카운트 종료 알림*/}
           {/*카운트 초기화*/}
