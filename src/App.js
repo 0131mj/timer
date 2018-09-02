@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import moment from 'moment'
-import ControlButtons from './Components/ControlButtons'
 
 const initialTime = {
     inputTime: 15, //minutes
@@ -100,33 +98,23 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <div>
-              {/*: <span>{this.state.inputTime}</span> 분*/}
-              <span>설정시간</span>
-              <button onClick={()=>{this.increaseTime()}}> + 5 </button>
-              <button onClick={()=>{this.decreaseTime()}}> - 5 </button>
+          <div className="counter-wrapper">
+              <div id="counter" className={this.state.isRunning ? 'time-running' : ''}>
+                  {Math.floor(this.state.remainTime/60)} : { (this.state.remainTime % 60) < 10 ? '0' + (this.state.remainTime % 60) : this.state.remainTime % 60  }
+              </div>
+              <div className="button-group">
+                  <span className="min">min.</span>
+                  <button onClick={()=>{this.increaseTime()}}> + 5</button>
+                  <button onClick={()=>{this.decreaseTime()}}> - 5</button>
+              </div>
           </div>
 
-          <div id="counter" style={{}}>
-              {Math.floor(this.state.remainTime/60)} : { (this.state.remainTime % 60) < 10 ? '0' + (this.state.remainTime % 60) : this.state.remainTime % 60  }
-          </div>
-
-          <div>
+          <div className="control-buttons">
               <button onClick={()=>this.toggleCount()}>
                   {this.state.isRunning ? '||' : '▶'}
               </button>
               <button onClick={()=>{this.countStop(); this.initialize();}}>RESET</button>
           </div>
-          {/*<ControlButtons/>*/}
-          <br/>
-
-
-          <br/>
-          {/*카운트 시작*/}
-          {/*카운트 종료 알림*/}
-          {/*카운트 초기화*/}
-          {/*카운트 시간 설정*/}
-          {/*카운트 중지*/}
       </div>
     );
   }

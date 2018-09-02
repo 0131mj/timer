@@ -1,28 +1,100 @@
+@import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+html{
+  height:100%;
+}
+body{
+  background-color: #ccc;
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+#root{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .App {
+  width:250px;
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  background-color:#111;
+  color:#fff;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.counter-wrapper{
+  display: flex;
+  margin:15px;
+  justify-content: center;
+  align-items: center;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+#counter{
+  font-size:40px;
+  margin: 10px 20px 0px;
+  color:#ccc;
 }
 
-.App-title {
-  font-size: 1.5em;
+#counter.time-running{
+  color:gold;
 }
 
-.App-intro {
-  font-size: large;
+
+.button-group{
+  display: flex;
+  flex-direction: column;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+button{
+  background-color: #eee;
+  cursor: pointer;
+  outline: none;
+  border:none;
+}
+
+button:hover{
+  background-color: #fff;
+}
+
+.button-group button{
+  width:50px;
+  border:1px solid #333;
+  border-radius: 3px;
+  height:25px;
+  background-color: #111;
+  color:#ddd;
+  margin-bottom: 3px;
+}
+
+.button-group button:hover{
+  background-color: #000;
+  color:#fff;
+  border:1px solid #222;
+}
+
+.button-group .min{
+  margin-bottom: 3px;
+  color:#888;
+  font-size:12px;
+}
+
+.control-buttons{
+  display: flex;
+}
+
+.control-buttons button{
+  /*margin: 3px;*/
+  /*border-radius: 3px;*/
+  width:50%;
+
+  border-right:1px solid #ccc;
+  box-shadow: none;
+
+  height:35px;
+  line-height: 35px;
+  font-size:14px;
+  flex-basis:auto;
 }
