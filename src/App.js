@@ -3,18 +3,18 @@ import './App.css';
 import moment from 'moment'
 import ControlButtons from './Components/ControlButtons'
 
+const initialTime = {
+    inputTime: 15, //minutes
+    remainTime : 15 * 60,
+    isRunning : false
+};
+
 class App extends Component {
 
     constructor(props){
         super(props);
         this.state = {
-          // limitTime: 0,
-          // hours : 0,
-          // minutes : 0,
-          // seconds: 0,
-
-            inputTime: 20, //minutes
-            remainTime : 20 * 60,
+            ...initialTime
         }
     }
 
@@ -31,13 +31,27 @@ class App extends Component {
         this.timer = setInterval(
             ()=>{this.setState({
                 ...this.state,
+                isRunning: true,
                 remainTime   : this.state.remainTime -1
             })},
         1000);
     }
 
     countStop(){
+        this.setState({
+            ...this.state,
+            isRunning: false,
+            remainTime   : this.state.remainTime -1
+        });
         clearInterval(this.timer);
+    }
+
+    toggleCount(){
+        if(!this.state.isRunning){
+            this.countDown();
+        }else{
+            this.countStop();
+        }
     }
 
     increaseTime(){
@@ -48,12 +62,24 @@ class App extends Component {
       })
     }
 
+    initialize(){
+        this.setState({
+            ...initialTime
+        })
+    }
+
     decreaseTime(){
-      if(this.state.inputTime > 0){
+      if(this.state.inputTime > 5){
           this.setState({
               ...this.state,
               inputTime : this.state.inputTime - 5,
               remainTime : this.state.remainTime - 300,
+          })
+      }else{
+          this.setState({
+              ...this.state,
+              inputTime : 0,
+              remainTime : 0,
           })
       }
     }
@@ -73,21 +99,23 @@ class App extends Component {
      * */
   render() {
     return (
-      <div className="App" style={{padding:"20px"}}>
+      <div className="App">
           <div>
               {/*: <span>{this.state.inputTime}</span> 분*/}
               <span>설정시간</span>
-              <button onClick={()=>{this.increaseTime()}}>▲</button>
-              <button onClick={()=>{this.decreaseTime()}}>▼</button>
+              <button onClick={()=>{this.increaseTime()}}> + 5 </button>
+              <button onClick={()=>{this.decreaseTime()}}> - 5 </button>
           </div>
 
-          <div style={{fontSize:"30px", margin:"20px"}}>
+          <div id="counter" style={{}}>
               {Math.floor(this.state.remainTime/60)} : { (this.state.remainTime % 60) < 10 ? '0' + (this.state.remainTime % 60) : this.state.remainTime % 60  }
           </div>
 
           <div>
-              <button onClick={()=>this.countDown()}>시작</button>
-              <button onClick={()=>this.countStop()}>중지</button>
+              <button onClick={()=>this.toggleCount()}>
+                  {this.state.isRunning ? '||' : '▶'}
+              </button>
+              <button onClick={()=>{this.countStop(); this.initialize();}}>RESET</button>
           </div>
           {/*<ControlButtons/>*/}
           <br/>
