@@ -30,7 +30,7 @@ class App extends Component {
             ()=>{this.setState({
                 ...this.state,
                 isRunning: true,
-                remainTime   : this.state.remainTime -1
+                remainTime   : this.state.remainTime - 1
             })},
         1000);
     }
@@ -38,8 +38,7 @@ class App extends Component {
     countStop(){
         this.setState({
             ...this.state,
-            isRunning: false,
-            remainTime   : this.state.remainTime -1
+            isRunning: false
         });
         clearInterval(this.timer);
     }
@@ -82,25 +81,20 @@ class App extends Component {
       }
     }
 
+    numberFormat(num){
+        if(num<10){
+            return '0'+num;
+        }else{
+            return num;
+        }
+    }
 
-    /**
-     *
-     * 필요한 파라미터
-     *
-     * 사용자가
-     * 입력한
-     * 시간,
-     *
-     * 남은 시간(현재 시간),
-     * 변하게 하는 함수,
-     *
-     * */
   render() {
     return (
       <div className="App">
           <div className="counter-wrapper">
               <div id="counter" className={this.state.isRunning ? 'time-running' : ''}>
-                  {Math.floor(this.state.remainTime/60)} : { (this.state.remainTime % 60) < 10 ? '0' + (this.state.remainTime % 60) : this.state.remainTime % 60  }
+                  {this.numberFormat(Math.floor(this.state.remainTime/60))} : {this.numberFormat(this.state.remainTime % 60)}
               </div>
               <div className="button-group">
                   <span className="min">min.</span>
