@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import '../node_modules/dseg/css/dseg.css'
 
 const initialTime = {
     inputTime: 15, //minutes
@@ -94,7 +95,7 @@ class App extends Component {
       <div className="App">
           <div className="counter-wrapper">
               <div id="counter" className={this.state.isRunning ? 'time-running' : ''}>
-                  {this.numberFormat(Math.floor(this.state.remainTime/60))} : {this.numberFormat(this.state.remainTime % 60)}
+                  {this.numberFormat(Math.floor(this.state.remainTime/60))}:{this.numberFormat(this.state.remainTime % 60)}
               </div>
               <div className="button-group">
                   <span className="min">min.</span>

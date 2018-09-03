@@ -1,4 +1,12 @@
 @import url(https://fonts.googleapis.com/earlyaccess/notosanskr.css);
+@font-face {
+  font-family: 'DSEG7-7SEGG';
+  src: url('../node_modules/dseg/fonts/DSEG7-Classic/DSEG7Classic-Bold.woff2') format('woff2'),
+  url('../node_modules/dseg/fonts/DSEG7-Classic/DSEG7Classic-Bold.woff') format('woff'),
+  url('../node_modules/dseg/fonts/DSEG7-Classic/DSEG7Classic-Bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 html{
   height:100%;
 }
@@ -17,7 +25,7 @@ body{
   align-items: center;
 }
 .App {
-  width:250px;
+  width:260px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -36,6 +44,8 @@ body{
   font-size:40px;
   margin: 10px 20px 0px;
   color:#ccc;
+  font-weight: bold;
+  font-family: 'DSEG7-Classic';
 }
 
 #counter.time-running{
