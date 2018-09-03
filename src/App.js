@@ -3,9 +3,10 @@ import './App.css';
 import '../node_modules/dseg/css/dseg.css'
 
 const initialTime = {
-    inputTime: 15, //minutes
-    remainTime : 15 * 60,
-    isRunning : false
+    inputTime: 0.5, //minutes
+    remainTime : 0.5 * 60,
+    isRunning : false,
+    isTimeOut : false,
 };
 
 class App extends Component {
@@ -22,17 +23,25 @@ class App extends Component {
     }
 
     /**
-     * TODO : clearInterval (0초 되면),
-     * 인풋값을 계산해서 초로 변환하기
+     * TODO : 시간 다됐을때 깜빡깜빡으로 변경, initialize 와 충돌 해결
      * */
 
     countDown(){
         this.timer = setInterval(
-            ()=>{this.setState({
-                ...this.state,
-                isRunning: true,
-                remainTime   : this.state.remainTime - 1
-            })},
+            ()=>{
+                if(this.state.remainTime === 0 ){
+                    this.toggleTimeOutModal();
+                    this.countStop();
+                    // this.initialize();
+                }
+                else{
+                    this.setState({
+                        ...this.state,
+                        isRunning: true,
+                        remainTime   : this.state.remainTime - 1
+                    })
+                }
+                },
         1000);
     }
 
@@ -52,18 +61,19 @@ class App extends Component {
         }
     }
 
+    toggleTimeOutModal(){
+        this.setState({
+            ...this.state,
+            isTimeOut : !this.state.isTimeOut
+        })
+    }
+
     increaseTime(){
       this.setState({
           ...this.state,
           inputTime : this.state.inputTime + 5,
           remainTime : this.state.remainTime + 300,
       })
-    }
-
-    initialize(){
-        this.setState({
-            ...initialTime
-        })
     }
 
     decreaseTime(){
@@ -82,6 +92,12 @@ class App extends Component {
       }
     }
 
+    initialize(){
+        this.setState({
+            ...initialTime
+        })
+    }
+
     numberFormat(num){
         if(num<10){
             return '0'+num;
@@ -93,6 +109,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+          {
+              this.state.isTimeOut &&
+              <div className="dimmed">
+                  <div className="timeout-modal">
+                      <p>시간 다 됐습니다.</p>
+                      <button onClick={()=>{this.toggleTimeOutModal()}}>확인</button>
+                  </div>
+              </div>
+          }
+
           <div className="counter-wrapper">
               <div id="counter" className={this.state.isRunning ? 'time-running' : ''}>
                   {this.numberFormat(Math.floor(this.state.remainTime/60))}:{this.numberFormat(this.state.remainTime % 60)}

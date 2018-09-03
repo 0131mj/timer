@@ -25,6 +25,7 @@ body{
   align-items: center;
 }
 .App {
+  position: relative;
   width:260px;
   display: flex;
   flex-direction: column;
@@ -107,4 +108,30 @@ button:hover{
   line-height: 35px;
   font-size:14px;
   flex-basis:auto;
+}
+.dimmed{
+  position: absolute;
+  width:100%;
+  height:100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.timeout-modal{
+  width:80%;
+  height:80%;
+  background-color: #fff;
+  color:black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.timeout-modal p{
+  margin:10px;
+}
+
+.timeout-modal button{
+  padding:5px 15px;
 }
